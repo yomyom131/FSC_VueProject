@@ -1,27 +1,24 @@
-import {createWebHistory, createRouter } from 'vue-router';
-import Computed from './components/Computed.vue';
-import Conditional from './components/Conditional.vue'
-import Count from './components/Count.vue';
-import HelloWorld from './components/HelloWorld.vue';
+import { defineAsyncComponent } from 'vue';
+import { createWebHistory, createRouter } from 'vue-router';
+
+const component = {
+  template: '<component :is="comp" />',
+  computed: {
+    comp() {
+      let { comp } = this.$route.params;
+      return defineAsyncComponent(() => import(`./pages/${comp}.vue`));
+    },
+  },
+};
 
 const routes = [
   {
     path: '/',
-    name: 'Helloworld',
-    component: HelloWorld
+    component: () => import('./components/HelloWorld.vue'),
   },
   {
-    path: '/computed',
-    component: Computed,
-  },
-  {
-    path: '/conditional',
-    component: Conditional,
-  },
-  {
-    path: '/count',
-    name: 'Count',
-    component: Count,
+    path: '/:comp',
+    component,
   },
 ];
 

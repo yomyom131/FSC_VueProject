@@ -1,0 +1,16 @@
+<script src="https://unpkg.com/vue@2.7.13"></script>
+<body>
+  <div id="app">
+    <ul>
+      <li v-for="(n, index) in list">{{index}} : {{ n }}</li>
+    </ul>
+  </div>
+  <script>
+    var app = new Vue({
+      el: "#app",
+      data: {
+        list: ["Vue.js", "React.jsHz", "Polymer.js", "Google", "Hanbif"],
+      },
+    });
+  </script>
+</body>
